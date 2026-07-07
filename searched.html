@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home.css">
-    <script defer src="js/controllers/homeController.js" type="module"></script>
+    <!-- <link rel="stylesheet" href="css/home.css"> -->
+    <script defer src="js/controllers/searchedController.js" type="module"></script>
 </head>
 <body>
     <header class="header">
@@ -38,39 +38,14 @@
     </header>
 
     <main class="main">
-        <section class="hero">
-            <div class="hero__overlay"></div>
-            <div class="hero__content">
-               <div class="badges-box">
-                    <div class="badge">Trending now</div>
-                    <div class="rate rate--hero"><span class="rate__value"></span> <svg class="rate__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></svg> <span class="gray">/10</span></div>
-                </div>
-                <h1 class="hero__title"></h1>
-                <p class="hero__description"></p>
-                <div class="hero__actions">
-                    <button class="btn btn--play"><svg class="btn__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>Play</button>
-                    <button class="btn btn--addToList btn--transparent"><svg class="btn__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"  ><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg> My List</button>
-                </div>`;
-            </div>
-        </section>
-
         <section class="movies" id="movies">
-            <h2 class="movies__title">Filmy</h2>
+            <h2 class="movies__title">Wyniki wyszukiwania</h2>
 
             <div class="movies__grid">
                 <div class="loader-overlay hidden">
                     <div class="loader off"></div>
                 </div>
             </div>
-
-            <nav class="pagination" aria-label="Paginacja">
-                <a href="#movies" data-page="1" class="pagination__item active">1</a>
-                <a href="#movies" data-page="2" class="pagination__item">2</a>
-                <a href="#movies" data-page="3" class="pagination__item">3</a>
-                <button class="pagination__jump-to">...</button>
-                <input class="jump-to__input" type="number" min="1" max="500">
-                <a data-page="500" class="pagination__item" href="#movies">500</a>
-            </nav>
         </section>
     </main>
 
