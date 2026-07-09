@@ -35,8 +35,6 @@ export function renderAutocompletionData(data) {
 }
 
 export const generateMoviesList = (data, genres) => {
-  console.log(data);
-
   const dataToRender = data?.results || data;
 
   moviesGrid.innerHTML = dataToRender
@@ -49,6 +47,11 @@ export const generateMoviesList = (data, genres) => {
       const movieRate =
         movie.vote_average === 0 ? "Brak" : movie.vote_average.toFixed(1);
 
+      const genresNames =
+        movie.genre_ids ?
+          genres.get(movie?.genre_ids[0])
+        : movie.genres[0].name;
+
       return `<div class="movie__card" id="${movie.id}">
                     <div class="movie__poster">
                         <img src="${imagePath}" alt="movie poster" class="movie__image">
@@ -56,7 +59,7 @@ export const generateMoviesList = (data, genres) => {
                         <div class="rate rate--poster">${movieRate}</div>
                     </div>
                     <h3 class="movie__title">${movie.original_title}</h3>
-                    <p class="movie__info">Data wydania: <span class="movie__date">${movie.release_date}</span> <span class="bull">&bull;</span> <span class="genre">${genres.get(movie?.genre_ids[0]) || "Brak gatunku"}</span></p>
+                    <p class="movie__info">Data wydania: <span class="movie__date">${movie.release_date}</span> <span class="bull">&bull;</span> <span class="genre">${genresNames || "Brak gatunku"}</span></p>
              </div>`;
     })
     .join("");
@@ -84,6 +87,82 @@ export const updateCollectionButton = (btnState, actualPage) => {
           viewBox="0 -960 960 960"
         >
           <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-        </svg>`
+        </svg>`;
   }
+};
+
+export const renderSearchHeader = (state) => {
+  console.log(state);
+
+  const { filteredMovies: data, query, filters } = state;
+
+  const movieQuerySpan = document.querySelector(".movie__query");
+  const moviesSearchDescription = document.querySelector(
+    ".movies__search-description",
+  );
+  const matchedMovies = document.querySelector(".movies__search-matches");
+  const moviesTitle = document.querySelector(".movies__title");
+
+  const basingData = data?.results || data;
+
+  moviesSearchDescription.innerHTML =
+    basingData.length > 0 ?
+      ""
+    : `Founded <span class="movie__query">${basingData.length}</span> matches`;
+
+  let searchDetails = "";
+
+  if (filters.genre !== null) {
+    searchDetails += `<span class="description-label"> genre</span> ${state.genres.get(filters.genre)}`;
+  }
+  if (filters.year !== null) {
+    searchDetails += `<span class="description-label"> from year</span> ${filters.year}`;
+  }
+  if (filters.rating !== null) {
+    searchDetails += `<span class="description-label"> rate from</span> ${filters.rating}`;
+  }
+
+  if (basingData.length === 0) {
+    return (moviesTitle.innerHTML =
+      'Nothing was founded <span class="movie__query"></span>');
+  } else {
+    moviesTitle.innerHTML =
+      state.showSearchHeader ?
+        `Searched results for <span class="movie__query">${query} ${searchDetails}</span>`
+      : "";
+  }
+};
+
+export const updateCollectionNumberSpan = () => {
+  const moviesLengthSpan = document.querySelector(".favourite-movies__length");
+
+  moviesLengthSpan.textContent =
+    JSON.parse(localStorage.getItem("collection"))?.length || 0;
+};
+
+export const cleanGenres = () => {
+  console.log("wykonuje się");
+
+  const genresItems = document.querySelectorAll(".genre__item");
+
+  genresItems.forEach((genreItem) => genreItem.classList.remove("active"));
+};
+
+export const highlightGenre = (genre) => {
+  cleanGenres();
+
+  genre.classList.toggle("active");
+};
+
+export const clearFilters = () => {
+  const ratingRadios = document.querySelectorAll(".rating__radio");
+  const filterYearSelected = document.querySelector(".year__selected");
+  const filterYearInput = document.querySelector(".year__input");
+
+  ratingRadios.forEach((ratingRadio) => (ratingRadio.checked = ""));
+
+  cleanGenres();
+
+  filterYearInput.value = 1998;
+  filterYearSelected.textContent = 1998;
 };

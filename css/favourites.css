@@ -1,0 +1,6 @@
+.favourites-movies__title {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--text-secondary-color);
+    font-weight: bold;
+}

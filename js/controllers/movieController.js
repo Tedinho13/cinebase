@@ -21,14 +21,16 @@ const getMovieID = () => {
 };
 
 async function controlFunction() {
-  startLoader();
   const id = getMovieID();
   const url = getMovieUrl(id);
 
   const data = await fetchData(url);
+  console.log(data);
+
   state.actualMovie = data;
   state.actualPage = "movie";
   hideLoader();
+
   renderMovieDetails(state.actualMovie);
 
   console.log(state);

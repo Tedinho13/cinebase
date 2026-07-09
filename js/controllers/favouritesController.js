@@ -15,8 +15,8 @@ import { state } from "../state.js";
 
 import { initSearch } from "../features/search.js";
 import { initProfile } from "../features/profile.js";
-
 import { listentoMovieCard } from "../features/displayMoviePage.js";
+import { showCollection } from "../features/showCollection.js";
 
 const filtersRatingBox = document.querySelector(".filters__select--rating");
 const filtersGenre = document.querySelector(".filters__select--genre");
@@ -38,7 +38,8 @@ const resetFilters = () => {
   };
 
   applyFilters();
-  callRenderFunctions(state);
+  callRenderFunctions(false, state);
+  clearGenreHighlights();
   clearFilters();
 };
 
@@ -51,12 +52,13 @@ const setFiltersVisibility = (hideFiltersSection, data) => {
 };
 
 const applyFilters = () => {
-  let movies = [...state.searchedMovies.results];
+  let movies = [...state.searchedMovies];
 
   if (state.filters.genre !== null) {
-    movies = movies.filter((movie) =>
-      movie.genre_ids.includes(state.filters.genre),
-    );
+    movies = movies.filter((movie) => {
+      const genres = movie.genre_ids ? movie.genre_ids : movie.genres;
+      return genres.includes(state.filters.genre);
+    });
   }
 
   if (state.filters.year !== null) {
@@ -72,7 +74,7 @@ const applyFilters = () => {
   }
 
   state.filteredMovies = movies;
-  
+  state.showSearchHeader = true;
   callRenderFunctions(state);
 };
 
@@ -118,23 +120,23 @@ const changeFilter = () => {
 };
 
 async function controlFunction() {
-  const query = getQueryFromAdress();
-  const url = getSearchedMovieUrl(query);
-  const data = await fetchData(url);
+  const data = JSON.parse(localStorage.getItem("collection"));
 
-  state.searchedMovies = data;
   state.filteredMovies = data;
-  state.query = query;
+  state.searchedMovies = data;
+  state.query = "";
   state.filtersVisible = true;
-  state.showSearchHeader = true;
+  state.showSearchHeader = false;
 
   await getGenres();
-
-  hideLoader();
 
   renderGenresList(state.genres);
 
   callRenderFunctions(state);
+
+  showCollection(state.genres);
+
+  hideLoader();
 }
 
 controlFunction();

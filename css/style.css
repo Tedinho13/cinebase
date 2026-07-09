@@ -178,14 +178,14 @@ html {
     height: 15vh;
 }
 
-.favourites__movies {
+.favourites-movies__item {
     padding: 1rem .3rem;
     color: var(--text-secondary-color);
     white-space: nowrap;
     font-size: 1.15rem;
 }
 
-.favourites__movies:active {
+.favourites-movies__item:active {
     background-color: var(--second-background-color);
 }
 
@@ -284,7 +284,7 @@ html {
         margin-bottom: 0;
     }
 
-    .favourites__movies:hover {
+    .favourites-movies__item:hover {
     background-color: var(--second-background-color);
     }
 
