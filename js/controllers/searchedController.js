@@ -13,6 +13,8 @@ import { getGenres } from "../services/genres.js";
 import { state } from "../state.js";
 
 import { initSearch } from "../features/search.js";
+import { initProfile } from "../features/profile.js";
+
 import { listentoMovieCard } from "../features/displayMoviePage.js";
 
 const filtersRatingBox = document.querySelector(".filters__select--rating");
@@ -137,6 +139,7 @@ controlFunction();
 
 initSearch();
 listentoMovieCard();
+initProfile();
 
 filtersRatingBox.addEventListener("change", changeFilter);
 filtersGenre.addEventListener("click", selectGenre);

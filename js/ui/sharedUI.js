@@ -61,3 +61,29 @@ export const generateMoviesList = (data, genres) => {
     })
     .join("");
 };
+
+export const updateCollectionButton = (btnState, actualPage) => {
+  const btnAddTolist = document.querySelector(".btn--addToList");
+  if (actualPage === "index") {
+    btnAddTolist.textContent =
+      btnState === "added" ? `Added to List` : `+ My List`;
+  } else if (actualPage === "movie") {
+    btnAddTolist.innerHTML =
+      btnState === "added" ?
+        `<svg
+          class="btn__icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          fill="#e3e3e3"
+        >
+          <path d="M200-440v-80h560v80H200Z" />
+        </svg>`
+      : `<svg
+          class="btn__icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+        >
+          <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+        </svg>`
+  }
+};

@@ -23,7 +23,7 @@ html {
     scroll-behavior: smooth;
 }
 
-@media(min-width: 1024px) {
+@media(min-width: 768px) {
     html {
         font-size: clamp(75%, 1.5vw, 100%);
     }
@@ -150,10 +150,43 @@ html {
 }
 
 .nav__profile {
+    position: relative;
     width: 2.2rem;
     height: 2.2rem;
     fill: var(--text-secondary-color);
     cursor: pointer;
+}
+
+.profile-dropdown {
+    z-index: 3;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    padding: 1rem;
+    height: 0;
+    min-width: 20vw;
+    max-width: 40vw;
+    background-color: var(--third-background-color);
+    border-radius: 10px;
+    box-shadow: 0 0 6px 3px rgba(255, 255,255, .2);
+    opacity: 0;
+    transition: .3s;
+}
+
+.profile-dropdown.active {
+    opacity: 1;
+    height: 15vh;
+}
+
+.favourites__movies {
+    padding: 1rem .3rem;
+    color: var(--text-secondary-color);
+    white-space: nowrap;
+    font-size: 1.15rem;
+}
+
+.favourites__movies:active {
+    background-color: var(--second-background-color);
 }
 
 .nav__search {
@@ -249,6 +282,10 @@ html {
 
     .nav__profile {
         margin-bottom: 0;
+    }
+
+    .favourites__movies:hover {
+    background-color: var(--second-background-color);
     }
 
     .nav__search-box {

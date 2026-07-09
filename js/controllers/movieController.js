@@ -4,6 +4,15 @@ import { startLoader, hideLoader } from "../ui/sharedUI.js";
 import { state } from "../state.js";
 
 import { initSearch } from "../features/search.js";
+import { initProfile } from "../features/profile.js";
+
+import { addToCollection } from "../features/addToCollection.js";
+
+const btnAddTolist = document.querySelector(".btn--addToList");
+
+const addToList = () => {
+  addToCollection(state.actualMovie, state.actualPage);
+};
 
 const getMovieID = () => {
   const params = new URLSearchParams(window.location.search);
@@ -18,6 +27,7 @@ async function controlFunction() {
 
   const data = await fetchData(url);
   state.actualMovie = data;
+  state.actualPage = "movie";
   hideLoader();
   renderMovieDetails(state.actualMovie);
 
@@ -27,5 +37,7 @@ async function controlFunction() {
 controlFunction();
 
 window.addEventListener("resize", () => renderMovieDetails(state.actualMovie));
+btnAddTolist.addEventListener("click", addToList);
 
 initSearch();
+initProfile();

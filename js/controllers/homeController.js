@@ -22,6 +22,7 @@ import { state } from "../state.js";
 import { adjustImage, setAutocompletionVisible } from "../ui/sharedUI.js";
 
 import { initSearch } from "../features/search.js";
+import { initProfile } from "../features/profile.js";
 import { addToCollection } from "../features/addToCollection.js";
 import { listentoMovieCard } from "../features/displayMoviePage.js";
 
@@ -33,8 +34,7 @@ const hero = document.querySelector(".hero");
 const btnAddTolist = document.querySelector(".btn--addToList");
 
 const addToList = () => {
-  const movieId = document.querySelector(".hero__content").id;
-  addToCollection(movieId);
+  addToCollection(state.featuredMovie, state.actualPage);
 };
 
 const getPopularMovies = async () => {
@@ -93,6 +93,7 @@ async function controlFunction() {
     const data = await fetchData(url);
     const loseIndex = drawNumber(data);
     state.featuredMovie = data.results[loseIndex];
+    state.actualPage = "index";
     generatePoster(state.featuredMovie);
     hideLoader();
 
@@ -112,3 +113,4 @@ btnAddTolist.addEventListener("click", addToList);
 
 initSearch();
 listentoMovieCard();
+initProfile();
