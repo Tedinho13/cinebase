@@ -1,4 +1,4 @@
-import { getGenresUrl, fetchData } from "../api.js";
+import { getGenresUrl, fetchData } from "./api.js";
 import { state } from "../state.js";
 
 export async function getGenres() {
@@ -12,7 +12,6 @@ export async function getGenres() {
     });
 
     state.genres = genresMap;
-
   } catch (err) {
     console.error(err);
   }

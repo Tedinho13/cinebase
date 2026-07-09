@@ -19,12 +19,12 @@ export function getFeaturedMovieUrl() {
 }
 
 export function getPopularMoviesUrl(page) {
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}&language=pl-PL&page=${page}`;
+  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}&language=en-US&page=${page}`;
   return url;
 }
 
 export function getGenresUrl() {
-  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKey}&language=pl-PL`;
+  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKey}&language=en-US`;
   return url;
 }
 

@@ -1,7 +1,9 @@
-import { fetchData, getMovieUrl } from "../api.js";
+import { fetchData, getMovieUrl } from "../services/api.js";
 import { renderMovieDetails } from "../ui/movieUI.js";
 import { startLoader, hideLoader } from "../ui/sharedUI.js";
 import { state } from "../state.js";
+
+import { initSearch } from "../features/search.js";
 
 const getMovieID = () => {
   const params = new URLSearchParams(window.location.search);
@@ -25,3 +27,5 @@ async function controlFunction() {
 controlFunction();
 
 window.addEventListener("resize", () => renderMovieDetails(state.actualMovie));
+
+initSearch();

@@ -17,8 +17,6 @@ export const generatePoster = (data) => {
   heroDesc.textContent = data.overview;
 };
 
-
-
 export const showInput = () => {
   console.log("klik");
 

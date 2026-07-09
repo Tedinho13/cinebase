@@ -22,3 +22,4 @@ export const renderMovieDetails = (data) => {
   rateValue.textContent = data.vote_average.toFixed(1);
 };
 
+

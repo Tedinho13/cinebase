@@ -5,7 +5,7 @@ import {
   getPopularMoviesUrl,
   getGenresUrl,
   getSearchedMovieUrl,
-} from "../api.js";
+} from "../services/api.js";
 import { generatePoster, showInput, generatePagination } from "../ui/homeUI.js";
 
 import {
@@ -21,63 +21,20 @@ import { state } from "../state.js";
 
 import { adjustImage, setAutocompletionVisible } from "../ui/sharedUI.js";
 
+import { initSearch } from "../features/search.js";
+import { addToCollection } from "../features/addToCollection.js";
+import { listentoMovieCard } from "../features/displayMoviePage.js";
+
 const pagination = document.querySelector(".pagination");
 
 const paginationJumpTo = document.querySelector(".pagination__jump-to");
 const jumpToInput = document.querySelector(".jump-to__input");
 const hero = document.querySelector(".hero");
-const moviesGrid = document.querySelector(".movies__grid");
-const heroContent = document.querySelector(".hero__content");
+const btnAddTolist = document.querySelector(".btn--addToList");
 
-const searchForm = document.querySelector(".nav__search");
-const searchInput = document.querySelector(".nav__search-input");
-const autocompletionList = document.querySelector(".autocompletion__list");
-
-const searchMovie = () => {
-  setAutocompletionVisible(false);
-  location.href = `searched.html?query=${encodeURIComponent(searchInput.value)}`;
-
-  searchInput.value = "";
-};
-
-const changeInputValue = (e) => {
-  if (!e.target.classList.contains("autocompletion__item")) return;
-
-  searchInput.value = e.target.dataset.title;
-
-  setAutocompletionVisible(false);
-
-  searchMovie();
-};
-
-const showAutocompletion = (e) => {
-  e.preventDefault();
-
-  const query = searchInput.value;
-  if (query !== searchInput.value) return;
-
-  if (!query) return setAutocompletionVisible(false);
-
-  clearTimeout(state.timeoutID);
-
-  state.timeoutID = setTimeout(async () => {
-    const url = getSearchedMovieUrl(query);
-    const data = await fetchData(url);
-    renderAutocompletionData(data);
-  }, 300);
-
-  setAutocompletionVisible(true);
-};
-
-const displayMoviePage = (e) => {
-  const card =
-    e.target.closest(".movie__card") || e.target.closest(".hero__content");
-
-  if (!card) return;
-  const movieId = card.id;
-
-  location.href = `movie.html?id=${movieId}`;
-  state.latestLocation = location.href;
+const addToList = () => {
+  const movieId = document.querySelector(".hero__content").id;
+  addToCollection(movieId);
 };
 
 const getPopularMovies = async () => {
@@ -151,12 +108,7 @@ window.addEventListener("resize", () => adjustImage(hero, state.featuredMovie));
 pagination.addEventListener("click", changePage);
 paginationJumpTo.addEventListener("click", showInput);
 jumpToInput.addEventListener("change", setPage);
-moviesGrid.addEventListener("click", displayMoviePage);
-heroContent.addEventListener("click", displayMoviePage);
-// EVENTY INPUTOWE
-searchInput.addEventListener("input", showAutocompletion);
-autocompletionList.addEventListener("click", changeInputValue);
-searchForm.addEventListener("submit", function () {
-  e.preventDefault();
-  searchMovie();
-});
+btnAddTolist.addEventListener("click", addToList);
+
+initSearch();
+listentoMovieCard();
