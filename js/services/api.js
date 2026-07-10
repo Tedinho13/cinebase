@@ -37,3 +37,8 @@ export function getSearchedMovieUrl(query) {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&query=${query}&language=en-US`;
   return url;
 }
+
+export function getMovieVideoUrl(id) {
+  const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${APIKey}&language=en-US`;
+  return url;
+}

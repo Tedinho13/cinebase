@@ -12,4 +12,5 @@ export const state = {
   genres: "",
   page: 1,
   inputValue: "",
+  selectedAutocompletionIndex: -1,
 };

@@ -1,4 +1,6 @@
 import { fetchData, getSearchedMovieUrl } from "../services/api.js";
+
+import { renderInfoAboutEmptyCollection } from "../ui/favouritesUI.js";
 import {
   generateMoviesList,
   hideLoader,
@@ -24,6 +26,8 @@ const filterYearInput = document.querySelector(".year__input");
 const filterYearSelected = document.querySelector(".year__selected");
 const filterBtnReset = document.querySelector(".filters__reset-btn");
 
+const moviesLoader = document.querySelector(".movies__grid .loader-overlay");
+
 const getQueryFromAdress = () => {
   const params = new URLSearchParams(window.location.search);
   const query = params.get("query");
@@ -37,14 +41,17 @@ const resetFilters = () => {
     rating: null,
   };
 
+  state.page = "favourites";
+
   applyFilters();
   callRenderFunctions(false, state);
-  clearGenreHighlights();
   clearFilters();
 };
 
 const setFiltersVisibility = (hideFiltersSection, data) => {
   const basingData = data?.results || data;
+
+  if (!basingData) return renderInfoAboutEmptyCollection();
 
   if (hideFiltersSection) {
     basingData.length >= 5 ? setFiltersVisible(true) : setFiltersVisible(false);
@@ -53,6 +60,8 @@ const setFiltersVisibility = (hideFiltersSection, data) => {
 
 const applyFilters = () => {
   let movies = [...state.searchedMovies];
+
+  state.page = "searched";
 
   if (state.filters.genre !== null) {
     movies = movies.filter((movie) => {
@@ -127,6 +136,7 @@ async function controlFunction() {
   state.query = "";
   state.filtersVisible = true;
   state.showSearchHeader = false;
+  state.page = "favourites";
 
   await getGenres();
 
@@ -136,7 +146,7 @@ async function controlFunction() {
 
   showCollection(state.genres);
 
-  hideLoader();
+  hideLoader(moviesLoader);
 }
 
 controlFunction();

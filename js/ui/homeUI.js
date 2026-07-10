@@ -18,7 +18,6 @@ export const generatePoster = (data) => {
 };
 
 export const showInput = () => {
-  console.log("klik");
 
   const paginationJumpTo = document.querySelector(".pagination__jump-to");
   const jumpToInput = document.querySelector(".jump-to__input");

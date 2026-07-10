@@ -14,8 +14,6 @@ export const renderGenresList = (genres) => {
         `<li data-genreid="${genre[0]}" class="genre__item">${genre[1]}</li>`,
     )
     .join("");
-
-  // console.log(genres);
 };
 
 

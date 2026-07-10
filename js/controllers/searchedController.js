@@ -24,6 +24,8 @@ const filterYearInput = document.querySelector(".year__input");
 const filterYearSelected = document.querySelector(".year__selected");
 const filterBtnReset = document.querySelector(".filters__reset-btn");
 
+const moviesLoader = document.querySelector(".movies__grid .loader-overlay");
+
 const getQueryFromAdress = () => {
   const params = new URLSearchParams(window.location.search);
   const query = params.get("query");
@@ -72,7 +74,7 @@ const applyFilters = () => {
   }
 
   state.filteredMovies = movies;
-  
+
   callRenderFunctions(state);
 };
 
@@ -127,10 +129,11 @@ async function controlFunction() {
   state.query = query;
   state.filtersVisible = true;
   state.showSearchHeader = true;
+  state.page = "searched";
 
   await getGenres();
 
-  hideLoader();
+  hideLoader(moviesLoader);
 
   renderGenresList(state.genres);
 

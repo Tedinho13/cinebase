@@ -1,7 +1,6 @@
 import { adjustImage } from "./sharedUI.js";
 
 export const renderMovieDetails = (data) => {
-  console.log(data);
 
   const moviePoster = document.querySelector(".movie-details__image");
   const movieBgcImage = document.querySelector(".movie-details__header");

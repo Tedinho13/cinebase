@@ -11,20 +11,21 @@ import { generatePoster, showInput, generatePagination } from "../ui/homeUI.js";
 import {
   startLoader,
   hideLoader,
-  renderAutocompletionData,
   generateMoviesList,
+  adjustImage,
+  setAutocompletionVisible,
 } from "../ui/sharedUI.js";
 
 import { getGenres } from "../services/genres.js";
 
 import { state } from "../state.js";
 
-import { adjustImage, setAutocompletionVisible } from "../ui/sharedUI.js";
-
 import { initSearch } from "../features/search.js";
 import { initProfile } from "../features/profile.js";
 import { addToCollection } from "../features/addToCollection.js";
 import { listentoMovieCard } from "../features/displayMoviePage.js";
+
+import { displayMovieTrailer } from "../features/displayMovieTrailer.js";
 
 const pagination = document.querySelector(".pagination");
 
@@ -32,6 +33,17 @@ const paginationJumpTo = document.querySelector(".pagination__jump-to");
 const jumpToInput = document.querySelector(".jump-to__input");
 const hero = document.querySelector(".hero");
 const btnAddTolist = document.querySelector(".btn--addToList");
+
+const btnPlay = document.querySelector(".btn--play");
+
+const heroLoader = document.querySelector(".hero .loader-overlay");
+const moviesLoader = document.querySelector(".movies__grid .loader-overlay");
+const videoLoader = document.querySelector(".video__overlay .loader-overlay");
+
+const goToMovieVideo = () => {
+  startLoader(videoLoader);
+  displayMovieTrailer(state.featuredMovie.id);
+};
 
 const addToList = () => {
   addToCollection(state.featuredMovie, state.actualPage);
@@ -73,7 +85,6 @@ const changePage = (e) => {
   // e.preventDefault();
   if (!e.target.classList.contains("pagination__item")) return;
   const pageID = Number(e.target.dataset.page);
-  console.log(pageID);
 
   state.page = pageID;
 
@@ -89,13 +100,16 @@ async function controlFunction() {
   try {
     await getGenres();
 
+    hideLoader(videoLoader);
+
     const url = getFeaturedMovieUrl();
     const data = await fetchData(url);
     const loseIndex = drawNumber(data);
     state.featuredMovie = data.results[loseIndex];
     state.actualPage = "index";
     generatePoster(state.featuredMovie);
-    hideLoader();
+    hideLoader(heroLoader);
+    hideLoader(moviesLoader);
 
     getPopularMovies();
   } catch (err) {
@@ -110,6 +124,7 @@ pagination.addEventListener("click", changePage);
 paginationJumpTo.addEventListener("click", showInput);
 jumpToInput.addEventListener("change", setPage);
 btnAddTolist.addEventListener("click", addToList);
+btnPlay.addEventListener("click", goToMovieVideo);
 
 initSearch();
 listentoMovieCard();

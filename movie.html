@@ -14,6 +14,14 @@
     <script defer src="js/controllers/movieController.js" type="module"></script>
 </head>
 <body>
+
+    <div class="video__overlay">
+        <iframe class="video__item" src="" frameborder="0"></iframe>
+        <div class="loader-overlay">
+                    <div class="loader off"></div>
+            </div>
+    </div>
+
     <header class="header">
     <nav class="main-nav">
         <div class="nav__brand">
@@ -62,7 +70,7 @@
                     <div class="movie-details__meta">
                         <svg class="movie-details__length-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm-99.5 291.5Q275-137 226-186t-77.5-114.5Q120-366 120-440t28.5-139.5Q177-645 226-694t114.5-77.5Q406-800 480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80q-74 0-139.5-28.5ZM678-242q82-82 82-198t-82-198q-82-82-198-82t-198 82q-82 82-82 198t82 198q82 82 198 82t198-82ZM480-440Z"/></svg><span class="movie-details__length"></span><span class="movie-details__genre"></span>
                     </div>
-                        <h1 class="header movie-details__title">Oppenheimer</h1>
+                        <h1 class="header movie-details__title"></h1>
                     <div class="movie-details__actions">
                         <span class="movie-details__rating"></span>
                         <button class="btn btn--play btn--movie-play"><svg class="btn__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>Play</button>
@@ -75,29 +83,9 @@
             <div class="movie-details__body">
                 <section class="movie-details__story">
                     <h2 class="header movie-details__story-title">The Story</h2>
-                    <p class="movie-details__story-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere adipisci nulla cupiditate facilis iusto magni nihil, optio blanditiis dolorum, tempora laborum vero totam dolorem quia recusandae, doloribus rem asperiores minima dicta! Ipsa recusandae eligendi saepe optio, amet cumque, a obcaecati nemo ab, ut alias voluptas!</p>
+                    <p class="movie-details__story-text"></p>
                 </section>
-                <!-- <aside class="movie-details__aside">
-                    <div class="movie-details__role">
-                        <h4 class="header movie-details__label">Director</h4>
-                        <p class="movie-details__value">Christopher Nolan</p>
-                    </div>
-
-                    <div class="movie-details__role">
-                        <h4 class="movie-details__label">Writers</h4>
-                        <p class="movie-details__value">Bob Dylan, Issac Newton</p>
-                    </div>
-                </aside> -->
             </div>
-
-            <!-- <section class="movie-details__cast">
-                <h3 class="header movie-details__cast-title">Featured Cast</h3>
-                <ul class="movie-details__list">
-                    <li class="movie-details__cast-person">Adam Heyek</li>
-                </ul>
-            </section> -->
-        
-
     </section>
         
     </main>
