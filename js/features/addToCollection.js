@@ -17,8 +17,6 @@ export const addToCollection = (data, actualPage) => {
     }
   }
 
-  console.log(data);
-
   const {
     backdrop_path,
     genre_ids,
@@ -44,9 +42,6 @@ export const addToCollection = (data, actualPage) => {
   });
 
   localStorage.setItem("collection", JSON.stringify(collectionData));
-
-  console.log(collectionData);
-
   updateCollectionNumberSpan();
 
   updateCollectionButton("added", actualPage);

@@ -14,6 +14,7 @@ import {
   generateMoviesList,
   adjustImage,
   setAutocompletionVisible,
+  initVideoModal
 } from "../ui/sharedUI.js";
 
 import { getGenres } from "../services/genres.js";
@@ -129,3 +130,4 @@ btnPlay.addEventListener("click", goToMovieVideo);
 initSearch();
 listentoMovieCard();
 initProfile();
+initVideoModal();

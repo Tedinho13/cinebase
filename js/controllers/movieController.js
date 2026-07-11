@@ -1,6 +1,6 @@
 import { fetchData, getMovieUrl } from "../services/api.js";
 import { renderMovieDetails } from "../ui/movieUI.js";
-import { startLoader, hideLoader } from "../ui/sharedUI.js";
+import { startLoader, hideLoader, initVideoModal } from "../ui/sharedUI.js";
 import { state } from "../state.js";
 
 import { initSearch } from "../features/search.js";
@@ -31,16 +31,20 @@ const getMovieID = () => {
 };
 
 async function controlFunction() {
-  const id = getMovieID();
-  const url = getMovieUrl(id);
+  try {
+    const id = getMovieID();
+    const url = getMovieUrl(id);
 
-  const data = await fetchData(url);
+    const data = await fetchData(url);
 
-  state.actualMovie = data;
-  state.actualPage = "movie";
-  hideLoader(movieLoader);
+    state.actualMovie = data;
+    state.actualPage = "movie";
+    hideLoader(movieLoader);
 
-  renderMovieDetails(state.actualMovie);
+    renderMovieDetails(state.actualMovie);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 controlFunction();
@@ -51,3 +55,4 @@ btnPlay.addEventListener("click", goToMovieVideo);
 
 initSearch();
 initProfile();
+initVideoModal();

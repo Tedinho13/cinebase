@@ -41,7 +41,7 @@ const resetFilters = () => {
     rating: null,
   };
 
-  state.page = "favourites";
+  state.pageDesc = "favourites";
 
   applyFilters();
   callRenderFunctions(false, state);
@@ -61,7 +61,7 @@ const setFiltersVisibility = (hideFiltersSection, data) => {
 const applyFilters = () => {
   let movies = [...state.searchedMovies];
 
-  state.page = "searched";
+  state.pageDesc = "searched";
 
   if (state.filters.genre !== null) {
     movies = movies.filter((movie) => {
@@ -136,7 +136,7 @@ async function controlFunction() {
   state.query = "";
   state.filtersVisible = true;
   state.showSearchHeader = false;
-  state.page = "favourites";
+  state.pageDesc = "favourites";
 
   await getGenres();
 

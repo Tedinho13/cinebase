@@ -60,7 +60,7 @@ export const generateMoviesList = (data, genres) => {
                         <div class="rate rate--poster">${movieRate}</div>
                     </div>
                     <h3 class="movie__title">${movie.original_title}</h3>
-                    <p class="movie__info">Data wydania: <span class="movie__date">${movie.release_date}</span> <span class="bull">&bull;</span> <span class="genre">${genresNames || "Brak gatunku"}</span></p>
+                    <p class="movie__info">Release date: <span class="movie__date">${movie.release_date}</span> <span class="bull">&bull;</span> <span class="genre">${genresNames || "Brak gatunku"}</span></p>
              </div>`;
     })
     .join("");
@@ -111,7 +111,7 @@ export const renderSearchHeader = (state) => {
   }
 
   moviesSearchDescription.innerHTML =
-    basingData.length > 0 && state.page === "searched" ?
+    basingData.length > 0 && state.pageDesc === "searched" ?
       `Founded <span class="movie__query">${basingData.length}</span> matches`
     : "";
 
@@ -221,5 +221,7 @@ export const renderMovieTrailer = (data) => {
   }
 };
 
-window.addEventListener("click", hideVideoModal);
-window.addEventListener("keydown", hideVideoModal);
+export function initVideoModal() {
+  window.addEventListener("click", hideVideoModal);
+  window.addEventListener("keydown", hideVideoModal);
+}

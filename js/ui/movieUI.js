@@ -16,7 +16,7 @@ export const renderMovieDetails = (data) => {
   moviePoster.alt = `${data.original_title}`;
   movieLength.textContent = (data.runtime / 60).toFixed(0) + "h";
   movieTitle.textContent = data.original_title;
-  movieGenre.textContent = `${data.genres[0].name}  ${data.genres[1]?.name || ""}`;
+  movieGenre.textContent = `${data.genres[0].name}  ${data.genres[1]?.name || "brak gatunku"}`;
   movieStory.textContent = data.overview;
   rateValue.textContent = data.vote_average.toFixed(1);
 };

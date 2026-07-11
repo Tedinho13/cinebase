@@ -129,7 +129,7 @@ async function controlFunction() {
   state.query = query;
   state.filtersVisible = true;
   state.showSearchHeader = true;
-  state.page = "searched";
+  state.pageDesc = "searched";
 
   await getGenres();
 
