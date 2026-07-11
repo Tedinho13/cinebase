@@ -55,7 +55,7 @@ export const generateMoviesList = (data, genres) => {
 
       return `<div class="movie__card" id="${movie.id}">
                     <div class="movie__poster">
-                        <img src="${imagePath}" alt="movie poster" class="movie__image">
+                        <img src="${imagePath}" alt="${movie.original_title} poster" class="movie__image">
 
                         <div class="rate rate--poster">${movieRate}</div>
                     </div>
